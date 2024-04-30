@@ -8,7 +8,7 @@ type TaskListProps = {
   onPinTask: (id: string) => void;
 };
 
-export const TaskList = ({ loading, tasks, onArchiveTask, onPinTask }: TaskListProps) => {
+export const TaskList = ({ loading = false, tasks, onArchiveTask, onPinTask }: TaskListProps) => {
   const events = { onArchiveTask, onPinTask };
 
   const LoadingRow = (
