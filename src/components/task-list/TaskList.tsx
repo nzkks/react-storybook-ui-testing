@@ -33,7 +33,15 @@ export const TaskList = ({ loading, tasks, onArchiveTask, onPinTask }: TaskListP
   }
 
   if (tasks.length === 0) {
-    return <div className="list-items">No tasks</div>;
+    return (
+      <div className="list-items" key={'empty'} data-testid="empty">
+        <div className="wrapper-message">
+          <span className="icon-check" />
+          <div className="title-message">You have no tasks</div>
+          <div className="subtitle-message">Sit back and relax</div>
+        </div>
+      </div>
+    );
   }
 
   return (
