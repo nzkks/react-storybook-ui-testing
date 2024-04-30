@@ -1,8 +1,15 @@
-/** @type { import('@storybook/react-vite').StorybookConfig } */
-const config = {
+import { StorybookConfig } from '@storybook/react-vite';
+
+const config: StorybookConfig = {
   stories: ['../src/components/**/*.stories.@(ts|tsx)'],
   staticDirs: ['../public'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
+    '@chromatic-com/storybook'
+  ],
   framework: {
     name: '@storybook/react-vite',
     options: {}
@@ -11,4 +18,5 @@ const config = {
     autodocs: 'tag'
   }
 };
+
 export default config;
