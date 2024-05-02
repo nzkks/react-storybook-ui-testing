@@ -1,15 +1,10 @@
-import { Task as TaskType } from '../../entities';
 import { Task } from '../task/Task';
+import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import { updateTaskState } from '../../lib/taskSlice';
 
-type TaskListProps = {
-  loading: boolean;
-  tasks: TaskType[];
-  onArchiveTask: (id: string) => void;
-  onPinTask: (id: string) => void;
-};
-
-export const TaskList = ({ loading = false, tasks, onArchiveTask, onPinTask }: TaskListProps) => {
-  const events = { onArchiveTask, onPinTask };
+export const TaskList = () => {
+  const { status, tasks } = useAppSelector(state => state.taskbox);
+  const dispatch = useAppDispatch();
 
   const LoadingRow = (
     <div className="loading-item">
@@ -20,7 +15,7 @@ export const TaskList = ({ loading = false, tasks, onArchiveTask, onPinTask }: T
     </div>
   );
 
-  if (loading) {
+  if (status === 'loading') {
     return (
       <div className="list-items" key={'loading'} data-testid="loading">
         {LoadingRow}
@@ -49,10 +44,17 @@ export const TaskList = ({ loading = false, tasks, onArchiveTask, onPinTask }: T
     ...tasks.filter(t => t.state !== 'TASK_PINNED')
   ];
 
+  const filteredTasks = tasksInOrder.filter(t => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED');
+
   return (
     <div className="list-items">
-      {tasksInOrder.map(task => (
-        <Task key={task.id} task={task} {...events} />
+      {filteredTasks.map(task => (
+        <Task
+          key={task.id}
+          task={task}
+          onArchiveTask={() => dispatch(updateTaskState({ id: task.id, newTaskState: 'TASK_ARCHIVED' }))}
+          onPinTask={() => dispatch(updateTaskState({ id: task.id, newTaskState: 'TASK_PINNED' }))}
+        />
       ))}
     </div>
   );
