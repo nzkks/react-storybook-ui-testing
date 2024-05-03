@@ -1,10 +1,10 @@
-import './App.css';
-import { TaskList } from './components/task-list/TaskList';
+import './index.css';
+import InboxScreen from './components/inbox-screen/InboxScreen';
 
 function App() {
   return (
     <div className="App">
-      <TaskList />
+      <InboxScreen />
     </div>
   );
 }
