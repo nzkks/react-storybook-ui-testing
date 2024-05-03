@@ -7,3 +7,10 @@ export type Task = {
   title: string;
   state: string;
 };
+
+export type Todo = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
