@@ -21,7 +21,7 @@ const initialState: InitialState = {
 };
 
 export const fetchTasks = createAsyncThunk('todos/fetchTodos', async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/todos?userId=1&_limit=10');
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos?userId=1');
   const data = await response.json();
   const result = data.map((task: Todo) => ({
     id: `${task.id}`,
