@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
 import { http, HttpResponse } from 'msw';
+import { fireEvent, waitFor, within } from '@storybook/test';
 
 import InboxScreen from './InboxScreen';
 import store from '../../lib/store';
 import { MockedState } from '../task-list/TaskList.stories';
+import { waitForLoaderToBeRemoved } from '../../utils/utils';
 
 const meta: Meta<typeof InboxScreen> = {
   component: InboxScreen,
@@ -24,6 +26,14 @@ export const Default: Story = {
         })
       ]
     }
+  },
+  play: async ({ canvasElement }) => {
+    await waitForLoaderToBeRemoved('loading', true);
+    const canvas = within(canvasElement);
+    await waitFor(async () => {
+      await fireEvent.click(canvas.getByLabelText('pinTask-1'));
+      await fireEvent.click(canvas.getByLabelText('pinTask-3'));
+    });
   }
 };
 

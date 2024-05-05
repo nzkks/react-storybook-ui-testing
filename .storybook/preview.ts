@@ -1,11 +1,12 @@
 import { Preview } from '@storybook/react';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { initialize, mswLoader, mswDecorator } from 'msw-storybook-addon';
 
 import '../src/index.css';
 
 initialize();
 
 const preview: Preview = {
+  decorators: [mswDecorator],
   parameters: {
     controls: {
       matchers: {
