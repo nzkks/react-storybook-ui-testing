@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "React and Storybook",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nzkks/react-storybook-taskbox"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "@storybook/test-runner": "^0.17.0",
