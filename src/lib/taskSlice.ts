@@ -31,10 +31,10 @@ const TasksSlice = createSlice({
   reducers: {
     updateTaskState: (state, action: PayloadAction<{ id: string; newTaskState: string }>) => {
       const { id, newTaskState } = action.payload;
-      const task = state.tasks.findIndex(task => task.id === id);
+      const taskIndex = state.tasks.findIndex(task => task.id === id);
 
-      if (task >= 0) {
-        state.tasks[task].state = newTaskState;
+      if (taskIndex >= 0) {
+        state.tasks[taskIndex].state = newTaskState;
       }
     }
   },
