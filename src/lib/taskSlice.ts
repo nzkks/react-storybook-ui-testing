@@ -1,13 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { Task, Todo } from '../entities';
 
-const defaultTasks = [
-  { id: '1', title: 'Something', state: 'TASK_INBOX' },
-  { id: '2', title: 'Something more', state: 'TASK_INBOX' },
-  { id: '3', title: 'Something else', state: 'TASK_INBOX' },
-  { id: '4', title: 'Something again', state: 'TASK_INBOX' }
-];
-
 type InitialState = {
   tasks: Task[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -15,7 +8,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  tasks: defaultTasks,
+  tasks: [],
   status: 'idle',
   error: null
 };

@@ -3,7 +3,16 @@ import { useAppSelector, useAppDispatch } from '../../lib/hooks';
 import { updateTaskState } from '../../lib/taskSlice';
 
 export const TaskList = () => {
-  const { status, tasks } = useAppSelector(state => state.taskbox);
+  const tasks = useAppSelector(state => {
+    const tasksInOrder = [
+      ...state.taskbox.tasks.filter(t => t.state === 'TASK_PINNED'),
+      ...state.taskbox.tasks.filter(t => t.state !== 'TASK_PINNED')
+    ];
+
+    const filteredTasks = tasksInOrder.filter(t => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED');
+    return filteredTasks;
+  });
+  const { status } = useAppSelector(state => state.taskbox);
   const dispatch = useAppDispatch();
 
   const LoadingRow = (
@@ -39,16 +48,9 @@ export const TaskList = () => {
     );
   }
 
-  const tasksInOrder = [
-    ...tasks.filter(t => t.state === 'TASK_PINNED'),
-    ...tasks.filter(t => t.state !== 'TASK_PINNED')
-  ];
-
-  const filteredTasks = tasksInOrder.filter(t => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED');
-
   return (
-    <div className="list-items">
-      {filteredTasks.map(task => (
+    <div className="list-items" key={'success'} data-testid="success">
+      {tasks.map(task => (
         <Task
           key={task.id}
           task={task}
