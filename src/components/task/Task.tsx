@@ -9,11 +9,11 @@ type TaskProps = {
 export const Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }: TaskProps) => {
   return (
     <div className={`list-item ${state}`}>
-      <label htmlFor="checked" aria-label={`archiveTask-${id}`} className="checkbox">
+      <label htmlFor={`archiveTask-${id}`} aria-label={`archiveTask-${id}`} className="checkbox">
         <input
           type="checkbox"
           disabled={true}
-          name="checked"
+          name={`archiveTask-${id}`}
           id={`archiveTask-${id}`}
           checked={state === 'TASK_ARCHIVED'}
         />
@@ -26,6 +26,7 @@ export const Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }: T
           value={title}
           readOnly={true}
           name="title"
+          id="title"
           placeholder="Input title"
           style={{ textOverflow: 'ellipsis' }}
         />
